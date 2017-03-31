@@ -343,6 +343,15 @@ config MMC_MESON_GX
 
 	  If you have a controller with this interface, say Y here.
 
+config MMC_MESON_GX_ANDROID_PARTITIONS
+	bool "Support for Amlogic in DT partition definitions"
+	depends on MMC_MESON_GX
+	depends on MTD
+	default n
+	help
+	  This parses device tree for Amlogic based partition schema
+	  used in their modified kernels.
+
 config MMC_MOXART
 	tristate "MOXART SD/MMC Host Controller support"
 	depends on ARCH_MOXART && MMC

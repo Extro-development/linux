@@ -389,6 +389,9 @@ struct mmc_host {
 	u32			dsr;	/* optional driver stage (DSR) value */
 
 	unsigned long		private[0] ____cacheline_aligned;
+#ifdef CONFIG_MMC_MESON_GX_ANDROID_PARTITIONS
+	int			storage_flag;
+#endif
 };
 
 struct device_node;

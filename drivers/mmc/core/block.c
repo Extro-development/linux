@@ -47,6 +47,9 @@
 
 #include "queue.h"
 #include "block.h"
+#ifdef CONFIG_MMC_MESON_GX_ANDROID_PARTITIONS
+#include <linux/mmc/meson-gx-mmc-partitions.h>
+#endif
 #include "core.h"
 #include "card.h"
 #include "host.h"
@@ -2131,6 +2134,11 @@ static int mmc_blk_probe(struct mmc_card *card)
 
 	if (mmc_add_disk(md))
 		goto out;
+
+#ifdef CONFIG_MMC_MESON_GX_ANDROID_PARTITIONS
+	/* amlogic add emmc partitions ops */
+	aml_emmc_partition_ops(card, md->disk);
+#endif
 
 	list_for_each_entry(part_md, &md->part, part) {
 		if (mmc_add_disk(part_md))
